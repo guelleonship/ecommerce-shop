@@ -13,6 +13,8 @@ env.config();
 //access mongoose functionalities
 const mongoose = require("mongoose");
 
+const cors = require('cors');
+
 
 
 //starts the server to start accpeting html requests
@@ -32,11 +34,15 @@ mongoose.connect(process.env.MONGODB_URL)
 })
 
 
+const corsOptions = {
+    origin: 'http://localhost:3001'
+}
+
+app.use(cors(corsOptions));
+
 
 //allows handling of JSON
 app.use(express.json());
-
-
 
 //middleware for products
 app.use('/api/products', product_router);
